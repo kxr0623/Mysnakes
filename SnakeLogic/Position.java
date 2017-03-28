@@ -2,8 +2,6 @@ package SnakeLogic;
 
 /**
  * Created by 52704 on 2017/3/26.
- * @param x The X coordinate.
- * @param y The Y coordinate.
  */
 public class Position {
    private int row;
@@ -24,6 +22,26 @@ public class Position {
    public Position translate(int dx, int dy){
       return new Position(row + dx, col + dy);
    }
+   // check the food point is occupied by snake's body or not.
+   public boolean occupied(Position snakebody){
+      return (row==snakebody.row) && (col==snakebody.col);
+   }
 
+
+
+
+
+   private void tests(){
+      Position testP =new Position(1,1);
+      Position testP2=new Position(1,3);
+      assert (occupied(testP)) ;
+      assert (!occupied(testP2));
+   }
+
+   public static void main(String[] args){
+      Position from=new Position(1,1);
+      from.tests();
+      System.out.println("tests pass!");
+   }
 
 }
