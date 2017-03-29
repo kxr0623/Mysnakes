@@ -26,7 +26,9 @@ public class Position {
    public boolean occupied(Position snakebody){
       return (row==snakebody.row) && (col==snakebody.col);
    }
-
+   public boolean inboard(int maxr, int maxc){
+      return (row<maxr && row>=0) &&(col<maxc && col>=0);
+   }
 
 
 
@@ -36,6 +38,8 @@ public class Position {
       Position testP2=new Position(1,3);
       assert (occupied(testP)) ;
       assert (!occupied(testP2));
+      assert (inboard(2,2));
+      assert (!inboard(-1,1));
    }
 
    public static void main(String[] args){

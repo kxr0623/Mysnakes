@@ -41,6 +41,7 @@ public class Controller {
          bg_Imageview.setVisible(false);
          mainbg_Imageview.setImage(new Image("resources/bg3.png"));
          mainbg_Imageview.setVisible(true);
+         op_pane.toFront();
          op_pane.setVisible(true);
    }
    @FXML
@@ -55,6 +56,17 @@ public class Controller {
          //todo:continue the game.
       }
 
+
+   }
+   @FXML
+   void initialize() {
+      assert mainbg_Imageview != null : "fx:id=\"mainbg_Imageview\" was not injected: check your FXML file 'sample.fxml'.";
+      assert startPane != null : "fx:id=\"startPane\" was not injected: check your FXML file 'sample.fxml'.";
+      assert bg_Imageview != null : "fx:id=\"bg_Imageview\" was not injected: check your FXML file 'sample.fxml'.";
+      assert start_btn != null : "fx:id=\"start_btn\" was not injected: check your FXML file 'sample.fxml'.";
+      assert op_pane != null : "fx:id=\"op_pane\" was not injected: check your FXML file 'sample.fxml'.";
+      assert score_lbl != null : "fx:id=\"score_lbl\" was not injected: check your FXML file 'sample.fxml'.";
+      assert stop_btn != null : "fx:id=\"stop_btn\" was not injected: check your FXML file 'sample.fxml'.";
 
    }
 }
