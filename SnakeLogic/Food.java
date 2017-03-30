@@ -12,9 +12,9 @@ public class Food {
    Color color;
    private int maxrows, maxcols;
 
-   public Food(int rows, int cols) {
-      this.maxrows = rows;
-      this.maxcols = cols;
+   public Food(int maxrows, int maxcols) {
+      this.maxrows = maxrows;
+      this.maxcols = maxcols;
       setColor(Color.RED);
       //setPosition();
    }
@@ -26,6 +26,10 @@ public class Food {
    void setPosition(){
       Random random =new Random();
       position = new Position(random.nextInt(maxrows),random.nextInt(maxcols));
+
+   }
+   void setPosition(int row,int col){
+      position = new Position(row,col);
 
    }
 
@@ -42,6 +46,7 @@ public class Food {
       assert(testing = true);
       if(testing){
          food.test();
+         System.out.println("tests pass!");
       }
       else {
          System.err.println(" Use java -ea Food for testing.");

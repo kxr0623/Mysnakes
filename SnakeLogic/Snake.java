@@ -5,24 +5,28 @@ import java.util.ArrayList;
 
 /**
  * Created by 52704 on 2017/3/26.
+ * the direction of snake is right at first,
+ * the color, length, start position is assigned by the parent class.
  */
 public class Snake {
-   Direction direction;
-   ArrayList<Position> snakebody ;
-   Color snakeColor;
-   int length;
-   Boolean dead ;
-   Position head;
-   Board board;
+   private Direction direction;
+   private ArrayList<Position> snakebody ;
+   private Color snakeColor;
+   private int length;
+   private Boolean alive;
+   private Position head;
+   private Board board;
 
    public Snake(Color snakeColor, int length,Position head) {
       this.direction = Direction.RIGHT;
       this.snakeColor = snakeColor;
       this.length = length;
-      this.dead = false;
+      this.alive = true;
       this.head = head;
+      this.board=board;
       snakebody=new ArrayList<Position>();
       snakebody.add(head);
+      System.out.println("head:"+this.getSnakebody().indexOf(head));
    }
 
    public Direction getDirection() {
@@ -33,39 +37,121 @@ public class Snake {
       return length;
    }
 
-   public Boolean getDead() {
-      return dead;
+   public Boolean getAlive() {
+      return alive;
    }
 
    public Position getHead() {
       return head;
    }
 
-   //update the place of snake.
-   // add the new place of snake and remove the point of tail.
-   void changePlace(){
-
-   }
-   //move according to the direction
-   void move(){
-
-   }
-   //eat a food and make the snake longer
-   void eat(){
-
-   }
-   //make the snake longer
-   void extend(){
-      if(dead==false){
+   //make the snake longer, add the head
+   void move_grow(){
+      if(alive ==true){
          length++;
-         //add the head
+         forward(head.translate(direction.getRow(),direction.getcol()));
       }
    }
-   void checkdead(Position position){
-
+   //move according to the direction, add head and remove tail.
+   void move(){
+      if(alive ==true){
+         forward(head.translate(direction.getRow(),direction.getcol()));
+         int tailindex=this.getSnakebody().indexOf(head)-length;
+         System.out.println("head:"+this.getSnakebody().indexOf(head));
+         System.out.println("tail:"+tailindex);
+         snakebody.remove(0);
+      }
+   }
+   void changeDirection(Direction d){
+      direction=d;
+   }
+   //move forward and and make the snake longer
+   private void forward(Position point){
+         if(snakebody.contains(point))
+            alive=false;
+         snakebody.add(point);
+         System.out.println("index of point:"+this.getSnakebody().indexOf(point));
+         head=point;
    }
 
    public ArrayList<Position> getSnakebody() {
       return snakebody;
+   }
+
+   public static void main(String[] args){
+      Position start=new Position(25,25);
+      Snake s=new Snake(Color.GREEN,1,start);
+      boolean testing = false;
+      assert(testing = true);
+      if(testing){
+         s.test();
+      }
+      else {
+         System.err.println(" Use java -ea Snake for testing.");
+         System.exit(1);
+      }
+   }
+   void test(){
+      //Snake this = new Snake(Color.GREEN,1,new Position(25,25));
+      Food food=new Food(50,50);
+      food.setPosition(26,24);
+      board=new Board(100,100,2,this);
+
+      //this.forward(new Position(26,25));//go right.
+      this.move();
+      for(int i=0;i<this.getSnakebody().size();i++)
+         System.out.println("right:"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
+      direction=Direction.UP;
+      this.changeDirection(direction);;//go up
+      this.move();
+      for(int i=0;i<this.getSnakebody().size();i++)
+         System.out.println("up:"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
+
+      //eat the food (26,24)
+      if (food.getPosition().equals(this.getHead())) {
+         this.move_grow();
+         food.setPosition(26,23);
+      } else {
+         this.move();
+      }
+      for(int i=0;i<this.getSnakebody().size();i++)
+         System.out.println("after eat(26,24):"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
+      assert (this.getLength()==2); System.out.println(this.length);
+
+//eat the food(26,23)
+      if (food.getPosition().equals(this.getHead())) {
+         this.move_grow();
+         food.setPosition(25,22);
+      } else {
+         this.move();
+      }
+      for(int i=0;i<this.getSnakebody().size();i++)
+         System.out.println("after eat(26,23):"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
+      assert (this.getLength()==3); System.out.println(this.length);
+
+      //move left
+      direction=Direction.LEFT;
+      if (food.getPosition().equals(this.getHead())) {
+         this.move_grow();
+         food.setPosition(25,22);
+      } else {
+         this.move();
+      }
+      for(int i=0;i<this.getSnakebody().size();i++)
+         System.out.println("after move left:"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
+      assert (this.getLength()==3); System.out.println(this.length);
+
+      //eat (25,22)
+      if (food.getPosition().equals(this.getHead())) {
+         this.move_grow();
+         food.setPosition(25,24);
+      } else {
+         this.move();
+      }
+      for(int i=0;i<this.getSnakebody().size();i++)
+         System.out.println("after eat(25,22):"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
+      assert (this.getLength()==4); System.out.println(this.length);
+
+
    }
 }

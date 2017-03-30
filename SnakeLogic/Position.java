@@ -29,7 +29,19 @@ public class Position {
    public boolean inboard(int maxr, int maxc){
       return (row<maxr && row>=0) &&(col<maxc && col>=0);
    }
-
+   @Override
+   public boolean equals(Object obj) {
+      if (obj == null)
+         return false;
+      if (!(obj instanceof Position))
+         return false;
+      Position other = (Position) obj;
+      if (row != other.row)
+         return false;
+      if (col != other.col)
+         return false;
+      return true;
+   }
 
 
 

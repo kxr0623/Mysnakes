@@ -16,7 +16,7 @@ public class Board {
       rows=(int)wigh/boxSize;
       cols=(int) heigh/boxSize;
       this.food=new Food(rows,cols);
-      if(checkBound(snake.head))
+      if(checkBound(snake.getHead()))
          this.snake=snake;
       else {
          throw new Error("the snake should in the board,change the position of head");
@@ -33,9 +33,10 @@ public class Board {
       if (y < 0) return false;
       return true;
    }
+   //make the snake move or forward the food.
    void updateState(){
       if (food.getPosition().equals(snake.getHead())) {
-         snake.extend();
+         snake.move_grow();
          setfoodPosition(snake);
       } else {
          snake.move();
@@ -66,4 +67,7 @@ public class Board {
       return boxSize;
    }
 
+   public Snake getSnake() {
+      return snake;
+   }
 }
