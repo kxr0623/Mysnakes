@@ -1,6 +1,8 @@
 package SnakeLogic;
 
-import java.awt.*;
+
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 
 /**
@@ -26,7 +28,7 @@ public class Snake {
       this.board=board;
       snakebody=new ArrayList<Position>();
       snakebody.add(head);
-      System.out.println("head:"+this.getSnakebody().indexOf(head));
+      System.out.println("0 head:"+this.getSnakebody().indexOf(head));
    }
 
    public Direction getDirection() {
@@ -45,15 +47,23 @@ public class Snake {
       return head;
    }
 
+   public Color getColor() {
+      return snakeColor;
+   }
+
+   public ArrayList<Position> getSnakebody() {
+      return snakebody;
+   }
+
    //make the snake longer, add the head
-   void move_grow(){
+   public void move_grow(){
       if(alive ==true){
          length++;
          forward(head.translate(direction.getRow(),direction.getcol()));
       }
    }
    //move according to the direction, add head and remove tail.
-   void move(){
+   public void move(){
       if(alive ==true){
          forward(head.translate(direction.getRow(),direction.getcol()));
          int tailindex=this.getSnakebody().indexOf(head)-length;
@@ -62,7 +72,7 @@ public class Snake {
          snakebody.remove(0);
       }
    }
-   void changeDirection(Direction d){
+   public void changeDirection(Direction d){
       direction=d;
    }
    //move forward and and make the snake longer
@@ -73,10 +83,10 @@ public class Snake {
          System.out.println("index of point:"+this.getSnakebody().indexOf(point));
          head=point;
    }
-
-   public ArrayList<Position> getSnakebody() {
-      return snakebody;
+   public void setAlive(Boolean flag){
+      alive=flag;
    }
+
 
    public static void main(String[] args){
       Position start=new Position(25,25);
@@ -85,6 +95,7 @@ public class Snake {
       assert(testing = true);
       if(testing){
          s.test();
+         System.out.println("Test pass!!!");
       }
       else {
          System.err.println(" Use java -ea Snake for testing.");

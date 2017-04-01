@@ -4,7 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.*;
 import javafx.stage.Stage;
+
+import java.awt.*;
 
 public class Main extends Application {
 
@@ -12,9 +15,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("../sample.fxml"));
+
         primaryStage.setResizable(false);
         primaryStage.setTitle("Snake Game");
-        primaryStage.setScene(new Scene(root, 900, 600));
+        Scene scene=new Scene(root,900,600);
+        primaryStage.setScene(scene);
         primaryStage.show();
 
     }

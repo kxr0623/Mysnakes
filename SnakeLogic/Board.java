@@ -1,5 +1,13 @@
 package SnakeLogic;
 
+
+
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+
+import javax.xml.bind.annotation.XmlType;
+
+
 /**
  * Created by 52704 on 2017/3/26.
  */
@@ -24,7 +32,7 @@ public class Board {
    }
 
    //allow the snake always in the grid
-   boolean checkBound(Position position){
+   public boolean checkBound(Position position){
       int x = position.getRow();
       int y = position.getCol();
       if (x >= width /boxSize) return false;
@@ -34,22 +42,59 @@ public class Board {
       return true;
    }
    //make the snake move or forward the food.
-   void updateState(){
+   public boolean updateState(KeyEvent event){
+      Direction changto;
+      changto=checkDirection(event);
+      snake.changeDirection(changto);
       if (food.getPosition().equals(snake.getHead())) {
          snake.move_grow();
          setfoodPosition(snake);
       } else {
          snake.move();
       }
+      if(!checkBound(snake.getHead())){
+         snake.setAlive(false);
+         return false;//outside the board
+      }
+      return true;
+   }
+   public boolean updateState(){
+
+      if (food.getPosition().equals(snake.getHead())) {
+         snake.move_grow();
+         setfoodPosition(snake);
+      } else {
+         snake.move();
+      }
+      if(!checkBound(snake.getHead())){
+         snake.setAlive(false);
+         return false;//outside the board
+      }
+      return true;
+   }
+   //check the key
+   public Direction checkDirection(KeyEvent event){
+      switch (event.getCode()) {
+         case UP:
+            return Direction.UP;
+         case DOWN:
+            return Direction.DOWN;
+         case LEFT:
+            return Direction.LEFT;
+         case RIGHT:
+            return Direction.RIGHT;
+         default:
+            return Direction.RIGHT;
+      }
    }
    //set food position in the board and not on the body of snake
-   void setfoodPosition(Snake snake){
+   public void setfoodPosition(Snake snake){
       do{
          food.setPosition();
       }
       while (snake.getSnakebody().contains(food.getPosition()));
    }
-   Position getfoodPosition(){
+   public Position getfoodPosition(){
       return food.getPosition();
    }
 
@@ -69,5 +114,29 @@ public class Board {
 
    public Snake getSnake() {
       return snake;
+   }
+
+   public Food getFood() {
+      return food;
+   }
+
+   public static void main(String[] args){
+      Position start=new Position(25,25);
+      Snake s=new Snake(Color.GREEN,1,start);
+      Board board_test=new Board(900,600,10,s);
+      boolean testing = false;
+      assert(testing = true);
+      if(testing){
+         board_test.test();
+      }
+      else {
+         System.err.println(" Use java -ea Board for testing.");
+         System.exit(1);
+      }
+   }
+   void test(){
+      //this.updateState();
+
+
    }
 }

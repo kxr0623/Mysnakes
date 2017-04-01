@@ -16,10 +16,13 @@ public class Food {
       this.maxrows = maxrows;
       this.maxcols = maxcols;
       setColor(Color.RED);
-      //setPosition();
+      setPosition();
    }
    Color setColor(Color c){
       color=c ;
+      return color;
+   }
+   public Color getColor(){
       return color;
    }
 // give the food a random position in the board
