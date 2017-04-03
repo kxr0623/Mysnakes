@@ -125,12 +125,12 @@ public class Controller {
       String s;
       if("Stop".equals(stop_btn.getText())){
          stop_btn.setText("Continue");
-         //todo: pause the game
+         // pause the game
       }
       else {
          stop_btn.setText("Stop");
 
-         //todo:continue the game.
+         //continue the game.
       }
    }
 

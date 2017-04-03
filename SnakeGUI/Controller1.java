@@ -82,7 +82,6 @@ public class Controller1 {
       Position p=new Position(30,30);
       snake=new Snake(Color.GREEN,1,p);
       board=new Board(760,600,SIZE,snake);
-
       timeline = new Timeline();
       timeline.setCycleCount(Timeline.INDEFINITE);
       timeline.getKeyFrames().add(
@@ -90,13 +89,8 @@ public class Controller1 {
                       new EventHandler<ActionEvent>() {
                          // KeyFrame event handler
                          public void handle(ActionEvent event) {
-                            //if the snake is dead or eat a food
-                            // if (board.updateState()) {
                             paint(board,context);
                             board.updateState();
-                            //apple.move(snake);
-                            // }
-
                          }
                       }));
       timeline.playFromStart();
@@ -140,14 +134,14 @@ public class Controller1 {
          if (timeline != null) {
             timeline.pause();
          }
-         //todo: pause the game
+         // pause the game
       }
       else {
          stop_btn.setText("Stop");
          if (timeline != null ) {
             timeline.play();
          }
-         //todo:continue the game.
+         //continue the game.
       }
    }
    @FXML
@@ -171,14 +165,13 @@ public class Controller1 {
       snake = board.getSnake();
       gc.setFill(snake.getColor());
       snake.getSnakebody().forEach(p -> paintPoint(p, gc));
-
-      //pause
+      // restart the game
       if (!snake.getAlive()) {
-         painfeedbake("your snake is dead!!!.");
+         painfeedbake("OH~your snake is dead!!!.");
          timeline.stop();
          stop_btn.setDisable(true);
          restart_btn.setDisable(false);
-         //todo: restart the game
+
       }
       // The score
       score_lbl.setText(""+1 * snake.getLength());
@@ -186,7 +179,8 @@ public class Controller1 {
    }
    //画一个点
    private  void paintPoint(Position p, GraphicsContext gc) {
-      gc.fillRect(p.getRow() * SIZE, p.getCol() * SIZE, SIZE, SIZE);
+      gc.fillOval(p.getRow()*SIZE, p.getCol()*SIZE, SIZE, SIZE);
+     // gc.fillRect(p.getRow() * SIZE, p.getCol() * SIZE, SIZE, SIZE);
    }
    //返回重玩提示语
    public void painfeedbake(String s){

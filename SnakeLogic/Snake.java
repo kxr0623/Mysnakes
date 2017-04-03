@@ -103,7 +103,7 @@ public class Snake {
       }
    }
    void test(){
-      //Snake this = new Snake(Color.GREEN,1,new Position(25,25));
+      //todo:test Snake
       Food food=new Food(50,50);
       food.setPosition(26,24);
       board=new Board(100,100,2,this);

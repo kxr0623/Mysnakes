@@ -1,12 +1,5 @@
 package SnakeLogic;
-
-
-
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-
-import javax.xml.bind.annotation.XmlType;
-
 
 /**
  * Created by 52704 on 2017/3/26.
@@ -42,22 +35,6 @@ public class Board {
       return true;
    }
    //make the snake move or forward the food.
-   public boolean updateState(KeyEvent event){
-      Direction changto;
-      changto=checkDirection(event);
-      snake.changeDirection(changto);
-      if (food.getPosition().equals(snake.getHead())) {
-         snake.move_grow();
-         setfoodPosition(snake);
-      } else {
-         snake.move();
-      }
-      if(!checkBound(snake.getHead())){
-         snake.setAlive(false);
-         return false;//outside the board
-      }
-      return true;
-   }
    public boolean updateState(){
 
       if (food.getPosition().equals(snake.getHead())) {
@@ -71,21 +48,6 @@ public class Board {
          return false;//outside the board
       }
       return true;
-   }
-   //check the key
-   public Direction checkDirection(KeyEvent event){
-      switch (event.getCode()) {
-         case UP:
-            return Direction.UP;
-         case DOWN:
-            return Direction.DOWN;
-         case LEFT:
-            return Direction.LEFT;
-         case RIGHT:
-            return Direction.RIGHT;
-         default:
-            return Direction.RIGHT;
-      }
    }
    //set food position in the board and not on the body of snake
    public void setfoodPosition(Snake snake){
@@ -135,7 +97,8 @@ public class Board {
       }
    }
    void test(){
-      //this.updateState();
+      //todo:test the Board.
+      // this.updateState();
 
 
    }

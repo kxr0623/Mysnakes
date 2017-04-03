@@ -7,18 +7,20 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressedEvent" onMouseEntered="#handleMouseEntered" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SnakeGUI.Controller1">
    <children>
+      <Line endX="760.0" endY="600.0" startY="600.0" />
       <Canvas fx:id="canvas" height="600.0" width="760.0">
          <effect>
             <BoxBlur />
          </effect></Canvas>
       <Pane fx:id="startPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
          <children>
-            <ImageView fx:id="bg_Imageview" fitHeight="600.0" fitWidth="960.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bg_Imageview" fitHeight="608.0" fitWidth="911.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/mainbg.png" />
                </image>
@@ -40,9 +42,10 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="op_pane" layoutX="760.0" layoutY="-8.0" prefHeight="617.0" prefWidth="140.0">
+      <Pane fx:id="op_pane" layoutX="760.0" layoutY="-8.0" prefHeight="617.0" prefWidth="140.0" visible="false">
          <children>
-            <Text fx:id="prompt_txt" fill="#f80000" layoutX="12.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt:" underline="true" wrappingWidth="122.999989690461">
+            <Line endY="620.0" />
+            <Text fx:id="prompt_txt" fill="#f80000" layoutX="12.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt:" underline="true" wrappingWidth="122.999989690461">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
