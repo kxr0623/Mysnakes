@@ -3,6 +3,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.BoxBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressedEvent" onMouseEntered="#handleMouseEntered" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SnakeGUI.Controller1">
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressedEvent" onMouseEntered="#handleMouseEntered" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SnakeGUI.Controller">
    <children>
       <Line endX="760.0" endY="600.0" startY="600.0" />
       <Canvas fx:id="canvas" height="600.0" width="760.0">
@@ -30,7 +31,7 @@
                   <Font name="Arial Black" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="start_btn" contentDisplay="CENTER" layoutX="355.0" layoutY="359.0" mnemonicParsing="false" onAction="#invisible_startPane" text="Start" textAlignment="CENTER">
+            <Button fx:id="start_btn" contentDisplay="CENTER" layoutX="355.0" layoutY="359.0" mnemonicParsing="false" onAction="#invisible_startPane" text="Start" textAlignment="CENTER" textFill="#01b960">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
@@ -40,32 +41,62 @@
                   <Font name="Arial Black" size="36.0" />
                </font>
             </Label>
+            <Pane fx:id="save_pane" layoutX="152.0" layoutY="127.0" prefHeight="292.0" prefWidth="540.0">
+               <children>
+                  <TextArea fx:id="userrname_txtarea" layoutX="114.0" layoutY="60.0" prefHeight="47.0" prefWidth="346.0" />
+                  <Label layoutX="38.0" layoutY="21.0" text="Input your username here:">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="save_okButton" layoutX="236.0" layoutY="187.0" mnemonicParsing="false" onAction="#save_newScore" prefHeight="50.0" prefWidth="100.0" text="OK">
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
          </children>
       </Pane>
-      <Pane fx:id="op_pane" layoutX="760.0" layoutY="-8.0" prefHeight="617.0" prefWidth="140.0" visible="false">
+      <Pane fx:id="op_pane" layoutX="760.0" layoutY="-8.0" prefHeight="617.0" prefWidth="140.0">
          <children>
-            <Line endY="620.0" />
-            <Text fx:id="prompt_txt" fill="#f80000" layoutX="12.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt:" underline="true" wrappingWidth="122.999989690461">
+            <Canvas fx:id="op_canvas" height="617.0" layoutX="-1.0" width="153.0">
+               <effect>
+                  <BoxBlur />
+               </effect>
+            </Canvas>
+            <Line endY="610.0" />
+            <Text fx:id="prompt_txt" fill="#f80000" layoutX="12.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt:" underline="true" wrappingWidth="122.999989690461">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Text>
-            <Label fx:id="score_lbl" contentDisplay="CENTER" layoutX="46.0" layoutY="261.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="111" textAlignment="CENTER" textFill="#ffee00">
+            <Label fx:id="score_lbl" contentDisplay="CENTER" layoutX="46.0" layoutY="232.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="111" textAlignment="CENTER" textFill="#eede00">
                <font>
                   <Font name="Arial Black" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="217.0" text="Score:">
+            <Label layoutX="14.0" layoutY="200.0" text="Score:">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="stop_btn" layoutX="13.0" layoutY="328.0" mnemonicParsing="false" onAction="#pauseGame" prefHeight="60.0" prefWidth="115.0" text="Stop">
+            <Button fx:id="stop_btn" layoutX="13.0" layoutY="308.0" mnemonicParsing="false" onAction="#pauseGame" prefHeight="48.0" prefWidth="115.0" text="Stop">
                <font>
                   <Font name="Book Antiqua Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="restart_btn" disable="true" layoutX="13.0" layoutY="411.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="60.0" prefWidth="115.0" text="Restart">
+            <Button fx:id="restart_btn" disable="true" layoutX="13.0" layoutY="376.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="48.0" prefWidth="115.0" text="Restart">
+               <font>
+                  <Font name="Book Antiqua Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="save_btn1" disable="true" layoutX="13.0" layoutY="444.0" mnemonicParsing="false" onAction="#saveScore" prefHeight="48.0" prefWidth="115.0" text="Save">
+               <font>
+                  <Font name="Book Antiqua Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="history_btn11" disable="true" layoutX="13.0" layoutY="510.0" mnemonicParsing="false" onAction="#showHistoryScore" prefHeight="48.0" prefWidth="115.0" text="History">
                <font>
                   <Font name="Book Antiqua Bold" size="20.0" />
                </font>

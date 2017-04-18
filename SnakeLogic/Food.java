@@ -33,7 +33,6 @@ public class Food {
    }
    void setPosition(int row,int col){
       position = new Position(row,col);
-
    }
 
    public Position getPosition() {
@@ -42,6 +41,8 @@ public class Food {
 
    void test(){
      assert (Color.RED.equals(this.color));
+     setPosition(24,25);
+     assert (getPosition().equals(new Position(24,25)));
    }
    public static void main(String[] args){
       Food food=new Food(10,10);
@@ -49,7 +50,7 @@ public class Food {
       assert(testing = true);
       if(testing){
          food.test();
-         System.out.println("tests pass!");
+         System.out.println("Tests pass!");
       }
       else {
          System.err.println(" Use java -ea Food for testing.");

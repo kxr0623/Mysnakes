@@ -19,6 +19,7 @@ public class Position {
    public int getCol() {
       return col;
    }
+   //change a position to another one
    public Position translate(int dx, int dy){
       return new Position(row + dx, col + dy);
    }
@@ -26,6 +27,7 @@ public class Position {
    public boolean occupied(Position snakebody){
       return (row==snakebody.row) && (col==snakebody.col);
    }
+   // check the point is in the board
    public boolean inboard(int maxr, int maxc){
       return (row<maxr && row>=0) &&(col<maxc && col>=0);
    }

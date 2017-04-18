@@ -17,18 +17,15 @@ public class Snake {
    private int length;
    private Boolean alive;
    private Position head;
-   private Board board;
-
    public Snake(Color snakeColor, int length,Position head) {
       this.direction = Direction.RIGHT;
       this.snakeColor = snakeColor;
       this.length = length;
       this.alive = true;
       this.head = head;
-      this.board=board;
       snakebody=new ArrayList<Position>();
-      snakebody.add(head);
-      System.out.println("0 head:"+this.getSnakebody().indexOf(head));
+      for(int i=0;i<length;i++)//set the initialize length of snake
+         snakebody.add(head);
    }
 
    public Direction getDirection() {
@@ -66,12 +63,10 @@ public class Snake {
    public void move(){
       if(alive ==true){
          forward(head.translate(direction.getRow(),direction.getcol()));
-         int tailindex=this.getSnakebody().indexOf(head)-length;
-         System.out.println("head:"+this.getSnakebody().indexOf(head));
-         System.out.println("tail:"+tailindex);
          snakebody.remove(0);
       }
    }
+   //change the direction of snake to d;
    public void changeDirection(Direction d){
       direction=d;
    }
@@ -80,9 +75,9 @@ public class Snake {
          if(snakebody.contains(point))
             alive=false;
          snakebody.add(point);
-         System.out.println("index of point:"+this.getSnakebody().indexOf(point));
          head=point;
    }
+   //set the state of snake .
    public void setAlive(Boolean flag){
       alive=flag;
    }
@@ -102,22 +97,30 @@ public class Snake {
          System.exit(1);
       }
    }
+   //test Snake
    void test(){
-      //todo:test Snake
       Food food=new Food(50,50);
       food.setPosition(26,24);
-      board=new Board(100,100,2,this);
-
+      Board board=new Board(100,100,2,this);
+      assert (this.getLength()==1);
+      assert (this.getAlive()==true);
+      assert (this.getHead().equals(new Position(25,25)));
+      assert (this.getColor().equals(Color.GREEN));
+      assert (this.getDirection().equals(Direction.RIGHT));
       //this.forward(new Position(26,25));//go right.
       this.move();
-      for(int i=0;i<this.getSnakebody().size();i++)
-         System.out.println("right:"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
-      direction=Direction.UP;
-      this.changeDirection(direction);;//go up
-      this.move();
-      for(int i=0;i<this.getSnakebody().size();i++)
-         System.out.println("up:"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
+      for(int i=0;i<this.getSnakebody().size();i++) {
+         assert (this.getSnakebody().get(i).getRow() ==26);
+         assert (this.getSnakebody().get(i).getCol()==25);
+      }
 
+      this.changeDirection(Direction.UP);//go up
+      assert (this.getDirection().equals(Direction.UP));
+      this.move();
+      for(int i=0;i<this.getSnakebody().size();i++) {
+         assert (this.getSnakebody().get(i).getRow() ==26);
+         assert (this.getSnakebody().get(i).getCol()==24);
+      }
       //eat the food (26,24)
       if (food.getPosition().equals(this.getHead())) {
          this.move_grow();
@@ -125,32 +128,39 @@ public class Snake {
       } else {
          this.move();
       }
-      for(int i=0;i<this.getSnakebody().size();i++)
-         System.out.println("after eat(26,24):"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
-      assert (this.getLength()==2); System.out.println(this.length);
+      for(int i=0;i<this.getSnakebody().size();i++) {
+         assert (this.getSnakebody().get(i).getRow() ==26);
+         assert (this.getSnakebody().get(i).getCol()==(24-i));
+      }
+      assert (this.getLength()==2);
 
-//eat the food(26,23)
+/*//eat the food(26,23)
       if (food.getPosition().equals(this.getHead())) {
          this.move_grow();
          food.setPosition(25,22);
       } else {
          this.move();
       }
-      for(int i=0;i<this.getSnakebody().size();i++)
-         System.out.println("after eat(26,23):"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
-      assert (this.getLength()==3); System.out.println(this.length);
+      for(int i=0;i<this.getSnakebody().size();i++) {
+         assert (this.getSnakebody().get(i).getRow() ==26);
+         assert (this.getSnakebody().get(i).getCol()==(24-i));
+      }
+      assert (this.getLength()==3);
 
       //move left
-      direction=Direction.LEFT;
+      this.changeDirection(Direction.LEFT);
+      assert (this.getDirection().equals(Direction.LEFT));
       if (food.getPosition().equals(this.getHead())) {
          this.move_grow();
          food.setPosition(25,22);
       } else {
          this.move();
       }
-      for(int i=0;i<this.getSnakebody().size();i++)
-         System.out.println("after move left:"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
-      assert (this.getLength()==3); System.out.println(this.length);
+      assert (this.getSnakebody().get(0).getRow() ==26);
+      assert (this.getSnakebody().get(0).getCol()==23);
+      assert (this.getSnakebody().get(2).getRow() ==25);
+      assert (this.getSnakebody().get(2).getCol()==22);
+      assert (this.getLength()==3);
 
       //eat (25,22)
       if (food.getPosition().equals(this.getHead())) {
@@ -159,10 +169,11 @@ public class Snake {
       } else {
          this.move();
       }
-      for(int i=0;i<this.getSnakebody().size();i++)
-         System.out.println("after eat(25,22):"+this.getSnakebody().get(i).getRow()+","+this.getSnakebody().get(i).getCol());
-      assert (this.getLength()==4); System.out.println(this.length);
-
-
+      assert (this.getSnakebody().get(0).getRow() ==26);
+      assert (this.getSnakebody().get(0).getCol()==23);
+      assert (this.getSnakebody().get(3).getRow() ==24);
+      assert (this.getSnakebody().get(3).getCol()==22);
+      assert (this.getLength()==4);
+      */
    }
 }

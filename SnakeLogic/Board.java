@@ -5,10 +5,10 @@ import javafx.scene.paint.Color;
  * Created by 52704 on 2017/3/26.
  */
 public class Board {
-   int width, heigh,rows,cols;
-   int boxSize;
-   Food food;
-   Snake snake;
+   private int width, heigh,rows,cols;
+   private int boxSize;
+   private Food food;
+   private Snake snake;
 
    public Board(int wigh, int heigh, int boxSize,Snake snake) {
       this.width = wigh;
@@ -34,9 +34,8 @@ public class Board {
       if (y < 0) return false;
       return true;
    }
-   //make the snake move or forward the food.
+   //make the snake move or eat the food. ensure the snake is in the board
    public boolean updateState(){
-
       if (food.getPosition().equals(snake.getHead())) {
          snake.move_grow();
          setfoodPosition(snake);
@@ -67,12 +66,6 @@ public class Board {
    public int getHeigh() {
       return heigh;
    }
-   public void setBoxSize(int size){
-      boxSize=size;
-   }
-   public int getBoxSize() {
-      return boxSize;
-   }
 
    public Snake getSnake() {
       return snake;
@@ -83,22 +76,33 @@ public class Board {
    }
 
    public static void main(String[] args){
-      Position start=new Position(25,25);
+      Position start=new Position(89,25);
       Snake s=new Snake(Color.GREEN,1,start);
       Board board_test=new Board(900,600,10,s);
       boolean testing = false;
       assert(testing = true);
       if(testing){
          board_test.test();
+         System.out.println("Tests pass!");
       }
       else {
          System.err.println(" Use java -ea Board for testing.");
          System.exit(1);
       }
    }
+   //test the methods of Board.
    void test(){
-      //todo:test the Board.
-      // this.updateState();
+      Position h=new Position(50,25);
+      Snake s=new Snake(Color.GREEN,1,h);
+      Board b=new Board(900,600,10,s);
+
+      Position p=new Position(30,300);
+      assert (!this.checkBound(p)) ;
+      assert (this.checkBound(this.getFood().getPosition()));
+
+      assert(!this.updateState()) ;
+      assert(b.updateState());
+
 
 
    }
