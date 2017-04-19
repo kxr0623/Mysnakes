@@ -25,8 +25,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller {
-   private static int SIZE=10;// the size of a box;
-
    @FXML
    private ResourceBundle resources;
    @FXML
@@ -37,18 +35,14 @@ public class Controller {
    private ImageView bg_Imageview;
    @FXML
    private Pane startPane;
-
    @FXML
    private Pane op_pane;
-
    @FXML
    private Canvas canvas;
    @FXML
    private Canvas op_canvas;
-
    @FXML
    private Text prompt_txt;
-
    @FXML
    private Button start_btn;
    @FXML
@@ -63,19 +57,14 @@ public class Controller {
    private Button save_cancelBtn;
    @FXML
    private Pane save_pane;
-
    @FXML
    private TextArea userrname_txtarea;
-
    @FXML
    private Button save_okButton;
    @FXML
    private ListView<String> history_lv;
-
    @FXML
    private Button history_okBtn;
-
-
    @FXML
    private Button history_btn;
    @FXML
@@ -84,16 +73,12 @@ public class Controller {
    private Button restart_btn;
    @FXML
    private TableView<String[]> table;
-
    @FXML
    private TableColumn<String[], String> score_col;
-
    @FXML
    private TableColumn<String[], String> uName_col;
-
    @FXML
    private TableColumn<String[], String> date_col;
-
    private Position p=new Position(30,30);
    private Snake snake;
    private Board board;
@@ -101,6 +86,7 @@ public class Controller {
    private Timeline timeline;
    private final double speed=100.0;//the initial speed of snake.
    private final int length = 2;//the initial length of snake.
+   private final int SIZE=10;// the size of a box;
    private History h=new History(".");
    @FXML
    void invisible_startPane(ActionEvent event) {
@@ -131,6 +117,7 @@ public class Controller {
       timeline.playFromStart();
    }
    @FXML
+   // use keyboard to change direction of snake
    void keyPressedEvent(KeyEvent event) {
       Direction direction=board.getSnake().getDirection();
       switch (event.getCode()) {
@@ -159,8 +146,8 @@ public class Controller {
    void handleMouseEntered(MouseEvent event) {
       rootPane.requestFocus();
    }
-
    @FXML
+   //pause or continue the game
    void pauseGame(ActionEvent event) {
       String s;
       if("Stop".equals(stop_btn.getText())){
@@ -170,7 +157,6 @@ public class Controller {
          if (timeline != null) {
             timeline.pause();
          }
-         // pause the game
       }
       else {
          stop_btn.setText("Stop");
@@ -179,10 +165,10 @@ public class Controller {
          if (timeline != null ) {
             timeline.play();
          }
-         //continue the game.
       }
    }
    @FXML
+   // restart the snake game enable all buttons
    void restartGame(ActionEvent event) {
       if(timeline!=null){
          timeline.stop();
@@ -196,14 +182,16 @@ public class Controller {
       run();
    }
    @FXML
+      //open the save pane
    void saveScore(ActionEvent event) {
-//todo
+
       save_btn1.setDisable(true);
       save_pane.toFront();
       save_pane.setVisible(true);
       restart_btn.setDisable(true);
       history_btn.setDisable(true);
    }
+   // save the new score to txt file
    @FXML
    void save_newScore(ActionEvent event) {
 
@@ -217,6 +205,7 @@ public class Controller {
       }
       else save_lbl.setText("username is null,Input valid username:");
    }
+   // cancel the save pane and enable or disable other buttons .
    @FXML
    void save_cancel(ActionEvent event) {
       save_pane.toBack();
@@ -225,11 +214,9 @@ public class Controller {
       history_btn.setDisable(false);
       restart_btn.setDisable(false);
    }
-
    @FXML
-   //show the highest 10 scores in history
+   //show the top 10 scores in history
    void showHistoryScore(ActionEvent event) {
-//todo: show the highest 10 history scores to users.
       String content[]=h.readfile("history.txt");
       if(content.equals(null)||content.length==0){
          painfeedbake("There is no history");
@@ -254,8 +241,8 @@ public class Controller {
          history_pane.toFront();
          history_pane.setVisible(true);
       }
-
    }
+   //close the history pane
    @FXML
    void closeHistory(ActionEvent event) {
       restart_btn.setDisable(false);
@@ -263,19 +250,16 @@ public class Controller {
       history_pane.toBack();
       history_pane.setVisible(false);
    }
+   // pain the bakeground the food, snake, score on the interface, and allow restart the game
    public void paint(Board board, GraphicsContext gc) {
       gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
-      //paint the bakeground
       Image image=new Image("resources/skyblue.jpg");
       gc.drawImage(image,0,0);
-      // paint the Food
       gc.setFill(board.getFood().getColor());
       paintPoint(board.getFood().getPosition(), gc);
-      // paint the snake
       snake = board.getSnake();
       gc.setFill(snake.getColor());
       snake.getSnakebody().forEach(p -> paintPoint(p, gc));
-      // restart the game
       if (!snake.getAlive()) {
          painfeedbake("OH~your snake is dead!!!.");
          timeline.stop();
@@ -284,18 +268,16 @@ public class Controller {
          save_btn1.setDisable(false);
          history_btn.setDisable(false);
       }
-      // The score
       score_lbl.setText(""+ (snake.getLength()-length));
    }
-   //paint one point
+   //paint one point on the interface
    private  void paintPoint(Position p, GraphicsContext gc) {
       gc.fillOval(p.getRow()*SIZE, p.getCol()*SIZE, SIZE, SIZE);
    }
-   //返回重玩提示语
+   //give a feedback to user
    public void painfeedbake(String s){
       prompt_txt.setText(s);
    }
-
    @FXML
    void initialize() {
       assert rootPane != null : "fx:id=\"rootPane\" was not injected: check your FXML file 'sample.fxml'.";
