@@ -18,7 +18,7 @@ public class History {
   public String[] readfile(String filename) {
       List<String> words =new ArrayList<>();
       try {
-         File file = new File(this.path+"/"+ filename);
+         File file = new File(""+ filename);
             Scanner in = new Scanner(file);
             while (in.hasNextLine()) {
                String line = in.nextLine();
@@ -74,7 +74,7 @@ public class History {
          return false;
       }
       try {
-         File file= new File(path+"/"+ filename);
+         File file= new File(""+ filename);
          if (file.exists()){
             file.delete();
          }
