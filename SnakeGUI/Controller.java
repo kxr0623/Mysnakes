@@ -23,7 +23,9 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/*
+* this class is used to control the actions on the game interfaces. including the starting page, playing page, save page, history page.
+* */
 public class Controller {
    @FXML
    private ResourceBundle resources;
@@ -71,14 +73,6 @@ public class Controller {
    private Pane history_pane;
    @FXML
    private Button restart_btn;
-   @FXML
-   private TableView<String[]> table;
-   @FXML
-   private TableColumn<String[], String> score_col;
-   @FXML
-   private TableColumn<String[], String> uName_col;
-   @FXML
-   private TableColumn<String[], String> date_col;
    private Position p=new Position(30,30);
    private Snake snake;
    private Board board;
@@ -251,7 +245,7 @@ public class Controller {
       history_pane.setVisible(false);
    }
    // pain the bakeground the food, snake, score on the interface, and allow restart the game
-   public void paint(Board board, GraphicsContext gc) {
+   private void paint(Board board, GraphicsContext gc) {
       gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
       Image image=new Image("resources/skyblue.jpg");
       gc.drawImage(image,0,0);
@@ -275,7 +269,7 @@ public class Controller {
       gc.fillOval(p.getRow()*SIZE, p.getCol()*SIZE, SIZE, SIZE);
    }
    //give a feedback to user
-   public void painfeedbake(String s){
+   private void painfeedbake(String s){
       prompt_txt.setText(s);
    }
    @FXML

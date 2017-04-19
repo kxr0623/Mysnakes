@@ -2,7 +2,9 @@ package SnakeLogic;
 import javafx.scene.paint.Color;
 
 /**
- * Created by 52704 on 2017/3/26.
+ * this class handle the attributes of a board. the board include a snake and a food
+ * the class check the snake and food are always in the board
+ * the class update the position of food and snake
  */
 public class Board {
    private int width, heigh,rows,cols;
@@ -25,7 +27,7 @@ public class Board {
    }
 
    //allow the snake always in the grid
-   public boolean checkBound(Position position){
+   private boolean checkBound(Position position){
       int x = position.getRow();
       int y = position.getCol();
       if (x >= width /boxSize) return false;
@@ -49,7 +51,7 @@ public class Board {
       return true;
    }
    //set food position in the board and not on the body of snake
-   public void setfoodPosition(Snake snake){
+   private void setfoodPosition(Snake snake){
       do{
          food.setPosition();
       }
@@ -87,7 +89,7 @@ public class Board {
       }
    }
    //test the methods of Board.
-   void test(){
+   private void test(){
       Position h=new Position(50,25);
       Snake s=new Snake(Color.GREEN,1,h);
       Board b=new Board(900,600,10,s);

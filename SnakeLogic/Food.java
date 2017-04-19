@@ -5,7 +5,9 @@ import javafx.scene.paint.Color;
 import java.util.Random;
 
 /**
- * Created by 52704 on 2017/3/26.
+ * this class is used to handle the attributes and actions of food.
+ * Including set the position, colour of food.
+ *
  */
 public class Food {
    Position position;
@@ -18,7 +20,7 @@ public class Food {
       setColor(Color.RED);
       setPosition();
    }
-   Color setColor(Color c){
+   private Color setColor(Color c){
       color=c ;
       return color;
    }
@@ -39,7 +41,7 @@ public class Food {
       return position;
    }
 
-   void test(){
+   private void test(){
      assert (Color.RED.equals(this.color));
      setPosition(24,25);
      assert (getPosition().equals(new Position(24,25)));

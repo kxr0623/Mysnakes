@@ -1,12 +1,8 @@
 package SnakeLogic;
-
-
 import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 
 /**
- * Created by 52704 on 2017/3/26.
  * the direction of snake is right at first,
  * the color, length, start position is assigned by the parent class.
  */
@@ -98,7 +94,7 @@ public class Snake {
       }
    }
    //test Snake FROM position (25,25): GO RIGHT, GO UP, eat the food (26,24)
-   void test(){
+   private void test(){
       Food food=new Food(50,50);
       food.setPosition(26,24);
       Board board=new Board(100,100,2,this);
