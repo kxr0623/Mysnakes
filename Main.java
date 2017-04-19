@@ -15,7 +15,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-
         primaryStage.setResizable(false);
         primaryStage.setTitle("Snake Game");
         primaryStage.getIcons().add(new Image("resources/icon.jpg"));
