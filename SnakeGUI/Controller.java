@@ -5,15 +5,14 @@ import SnakeLogic.History;
 import SnakeLogic.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -22,7 +21,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -56,9 +54,13 @@ public class Controller {
    @FXML
    private Label score_lbl;
    @FXML
+   private Label save_lbl;
+   @FXML
    private Button stop_btn;
    @FXML
    private Button save_btn1;
+   @FXML
+   private Button save_cancelBtn;
    @FXML
    private Pane save_pane;
 
@@ -67,12 +69,30 @@ public class Controller {
 
    @FXML
    private Button save_okButton;
+   @FXML
+   private ListView<String> history_lv;
 
    @FXML
-   private Button history_btn11;
+   private Button history_okBtn;
 
+
+   @FXML
+   private Button history_btn;
+   @FXML
+   private Pane history_pane;
    @FXML
    private Button restart_btn;
+   @FXML
+   private TableView<String[]> table;
+
+   @FXML
+   private TableColumn<String[], String> score_col;
+
+   @FXML
+   private TableColumn<String[], String> uName_col;
+
+   @FXML
+   private TableColumn<String[], String> date_col;
 
    private Position p=new Position(30,30);
    private Snake snake;
@@ -81,6 +101,7 @@ public class Controller {
    private Timeline timeline;
    private final double speed=100.0;//the initial speed of snake.
    private final int length = 2;//the initial length of snake.
+   private History h=new History(".");
    @FXML
    void invisible_startPane(ActionEvent event) {
       startPane.setVisible(false);
@@ -144,6 +165,8 @@ public class Controller {
       String s;
       if("Stop".equals(stop_btn.getText())){
          stop_btn.setText("Continue");
+         history_btn.setDisable(false);
+         restart_btn.setDisable(false);
          if (timeline != null) {
             timeline.pause();
          }
@@ -151,6 +174,8 @@ public class Controller {
       }
       else {
          stop_btn.setText("Stop");
+         restart_btn.setDisable(true);
+         history_btn.setDisable(true);
          if (timeline != null ) {
             timeline.play();
          }
@@ -163,7 +188,10 @@ public class Controller {
          timeline.stop();
       }
       restart_btn.setDisable(true);
+      save_btn1.setDisable(true);
+      history_btn.setDisable(true);
       stop_btn.setDisable(false);
+      stop_btn.setText("Stop");
       painfeedbake("Prompt:");
       run();
    }
@@ -171,19 +199,69 @@ public class Controller {
    void saveScore(ActionEvent event) {
 //todo
       save_btn1.setDisable(true);
+      save_pane.toFront();
       save_pane.setVisible(true);
-      History h=new History(".");
-      h.writetofile("us",score_lbl.getText(),"history.txt");
+      restart_btn.setDisable(true);
+      history_btn.setDisable(true);
    }
    @FXML
    void save_newScore(ActionEvent event) {
-      History h=new History(".");
-      h.writetofile(userrname_txtarea.getText(),score_lbl.getText(),"history.txt");
+
+      if(!userrname_txtarea.getText().equals(null) && !userrname_txtarea.getText().equals("")) {
+         h.writetofile(userrname_txtarea.getText(), score_lbl.getText(), "history.txt");
+         save_pane.toBack();
+         save_pane.setVisible(false);
+         history_btn.setDisable(false);
+         restart_btn.setDisable(false);
+         painfeedbake("Save susessfully!");
+      }
+      else save_lbl.setText("username is null,Input valid username:");
+   }
+   @FXML
+   void save_cancel(ActionEvent event) {
+      save_pane.toBack();
+      save_pane.setVisible(false);
+      save_btn1.setDisable(false);
+      history_btn.setDisable(false);
+      restart_btn.setDisable(false);
    }
 
    @FXML
+   //show the highest 10 scores in history
    void showHistoryScore(ActionEvent event) {
-//todo
+//todo: show the highest 10 history scores to users.
+      String content[]=h.readfile("history.txt");
+      if(content.equals(null)||content.length==0){
+         painfeedbake("There is no history");
+      }
+      else {
+         String show[] ;
+         if(content.length<10) {
+            show= new String[content.length];
+            show=content;
+         }
+         else {
+            show=new String[10];
+            for(int i=0;i<10;i++){
+               show[i]=content[i];
+            }
+         }
+         ObservableList<String> items = FXCollections.observableArrayList(
+                 show);
+         history_lv.setItems(items);
+         restart_btn.setDisable(true);
+         stop_btn.setDisable(true);
+         history_pane.toFront();
+         history_pane.setVisible(true);
+      }
+
+   }
+   @FXML
+   void closeHistory(ActionEvent event) {
+      restart_btn.setDisable(false);
+      stop_btn.setDisable(false);
+      history_pane.toBack();
+      history_pane.setVisible(false);
    }
    public void paint(Board board, GraphicsContext gc) {
       gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
@@ -204,7 +282,7 @@ public class Controller {
          stop_btn.setDisable(true);
          restart_btn.setDisable(false);
          save_btn1.setDisable(false);
-         history_btn11.setDisable(false);
+         history_btn.setDisable(false);
       }
       // The score
       score_lbl.setText(""+ (snake.getLength()-length));

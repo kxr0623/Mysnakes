@@ -3,6 +3,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.BoxBlur?>
 <?import javafx.scene.image.Image?>
@@ -41,24 +42,29 @@
                   <Font name="Arial Black" size="36.0" />
                </font>
             </Label>
-            <Pane fx:id="save_pane" layoutX="152.0" layoutY="127.0" prefHeight="292.0" prefWidth="540.0">
-               <children>
-                  <TextArea fx:id="userrname_txtarea" layoutX="114.0" layoutY="60.0" prefHeight="47.0" prefWidth="346.0" />
-                  <Label layoutX="38.0" layoutY="21.0" text="Input your username here:">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="save_okButton" layoutX="236.0" layoutY="187.0" mnemonicParsing="false" onAction="#save_newScore" prefHeight="50.0" prefWidth="100.0" text="OK">
-                     <font>
-                        <Font name="System Bold Italic" size="24.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Pane>
          </children>
       </Pane>
-      <Pane fx:id="op_pane" layoutX="760.0" layoutY="-8.0" prefHeight="617.0" prefWidth="140.0">
+      <Pane fx:id="save_pane" layoutX="149.0" layoutY="129.0" prefHeight="275.0" prefWidth="582.0" visible="false">
+         <children>
+            <TextArea fx:id="userrname_txtarea" layoutX="114.0" layoutY="60.0" prefHeight="47.0" prefWidth="346.0" />
+            <Label fx:id="save_lbl" layoutX="38.0" layoutY="21.0" text="Input your username here:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="save_okButton" layoutX="165.0" layoutY="187.0" mnemonicParsing="false" onAction="#save_newScore" prefHeight="50.0" prefWidth="100.0" text="OK">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="save_cancelBtn" layoutX="309.0" layoutY="187.0" mnemonicParsing="false" onAction="#save_cancel" prefHeight="50.0" prefWidth="100.0" text="CANCEL">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="op_pane" layoutX="760.0" layoutY="-8.0" prefHeight="617.0" prefWidth="140.0" visible="false">
          <children>
             <Canvas fx:id="op_canvas" height="617.0" layoutX="-1.0" width="153.0">
                <effect>
@@ -96,11 +102,17 @@
                   <Font name="Book Antiqua Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="history_btn11" disable="true" layoutX="13.0" layoutY="510.0" mnemonicParsing="false" onAction="#showHistoryScore" prefHeight="48.0" prefWidth="115.0" text="History">
+            <Button fx:id="history_btn" disable="true" layoutX="13.0" layoutY="510.0" mnemonicParsing="false" onAction="#showHistoryScore" prefHeight="48.0" prefWidth="115.0" text="History">
                <font>
                   <Font name="Book Antiqua Bold" size="20.0" />
                </font>
             </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="history_pane" layoutX="175.0" layoutY="81.0" prefHeight="413.0" prefWidth="534.0" visible="false">
+         <children>
+            <ListView fx:id="history_lv" prefHeight="413.0" prefWidth="534.0" />
+            <Button fx:id="history_okBtn" layoutX="164.0" layoutY="379.0" mnemonicParsing="false" onAction="#closeHistory" prefHeight="32.0" prefWidth="222.0" text="Back" />
          </children>
       </Pane>
    </children>
