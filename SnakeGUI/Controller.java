@@ -84,7 +84,7 @@ public class Controller {
    private Board board;
    private GraphicsContext context;
    private Timeline timeline;
-   private final double speed=100.0;//the initial speed of snake.
+   private final double speed=90.0;//the initial speed of snake.
    private final int length = 2;//the initial length of snake.
    private final int SIZE=10;// the size of a box;
    private History h=new History(".");

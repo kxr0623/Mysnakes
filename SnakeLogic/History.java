@@ -105,7 +105,7 @@ public class History {
          System.out.println("TESTS PASS!");
       }
       else {
-         System.err.println("please input \"java -ea history data.txt\"for testing.");
+         System.err.println("please input \"java -ea history \"for testing.");
          System.exit(1);
       }
    }

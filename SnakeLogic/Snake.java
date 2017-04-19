@@ -97,7 +97,7 @@ public class Snake {
          System.exit(1);
       }
    }
-   //test Snake
+   //test Snake FROM position (25,25): GO RIGHT, GO UP, eat the food (26,24)
    void test(){
       Food food=new Food(50,50);
       food.setPosition(26,24);
@@ -107,21 +107,21 @@ public class Snake {
       assert (this.getHead().equals(new Position(25,25)));
       assert (this.getColor().equals(Color.GREEN));
       assert (this.getDirection().equals(Direction.RIGHT));
-      //this.forward(new Position(26,25));//go right.
+
       this.move();
       for(int i=0;i<this.getSnakebody().size();i++) {
          assert (this.getSnakebody().get(i).getRow() ==26);
          assert (this.getSnakebody().get(i).getCol()==25);
       }
 
-      this.changeDirection(Direction.UP);//go up
+      this.changeDirection(Direction.UP);
       assert (this.getDirection().equals(Direction.UP));
       this.move();
       for(int i=0;i<this.getSnakebody().size();i++) {
          assert (this.getSnakebody().get(i).getRow() ==26);
          assert (this.getSnakebody().get(i).getCol()==24);
       }
-      //eat the food (26,24)
+
       if (food.getPosition().equals(this.getHead())) {
          this.move_grow();
          food.setPosition(26,23);
@@ -133,47 +133,5 @@ public class Snake {
          assert (this.getSnakebody().get(i).getCol()==(24-i));
       }
       assert (this.getLength()==2);
-
-/*//eat the food(26,23)
-      if (food.getPosition().equals(this.getHead())) {
-         this.move_grow();
-         food.setPosition(25,22);
-      } else {
-         this.move();
-      }
-      for(int i=0;i<this.getSnakebody().size();i++) {
-         assert (this.getSnakebody().get(i).getRow() ==26);
-         assert (this.getSnakebody().get(i).getCol()==(24-i));
-      }
-      assert (this.getLength()==3);
-
-      //move left
-      this.changeDirection(Direction.LEFT);
-      assert (this.getDirection().equals(Direction.LEFT));
-      if (food.getPosition().equals(this.getHead())) {
-         this.move_grow();
-         food.setPosition(25,22);
-      } else {
-         this.move();
-      }
-      assert (this.getSnakebody().get(0).getRow() ==26);
-      assert (this.getSnakebody().get(0).getCol()==23);
-      assert (this.getSnakebody().get(2).getRow() ==25);
-      assert (this.getSnakebody().get(2).getCol()==22);
-      assert (this.getLength()==3);
-
-      //eat (25,22)
-      if (food.getPosition().equals(this.getHead())) {
-         this.move_grow();
-         food.setPosition(25,24);
-      } else {
-         this.move();
-      }
-      assert (this.getSnakebody().get(0).getRow() ==26);
-      assert (this.getSnakebody().get(0).getCol()==23);
-      assert (this.getSnakebody().get(3).getRow() ==24);
-      assert (this.getSnakebody().get(3).getCol()==22);
-      assert (this.getLength()==4);
-      */
    }
 }

@@ -45,8 +45,6 @@ public class Position {
       return true;
    }
 
-
-
    private void tests(){
       Position testP =new Position(1,1);
       Position testP2=new Position(1,3);
@@ -58,8 +56,16 @@ public class Position {
 
    public static void main(String[] args){
       Position from=new Position(1,1);
-      from.tests();
-      System.out.println("tests pass!");
+      boolean testing = false;
+      assert(testing = true);
+      if(testing){
+         from.tests();
+         System.out.println("Test pass!!!");
+      }
+      else {
+         System.err.println(" Use java -ea Position for testing.");
+         System.exit(1);
+      }
    }
 
 }

@@ -1,7 +1,7 @@
 package SnakeLogic;
 
 /**
- * Created by 52704 on 2017/3/26.
+ * list of the direction of snake
  */
 public enum  Direction {
    UP (0,-1),

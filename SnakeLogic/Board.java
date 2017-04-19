@@ -58,19 +58,15 @@ public class Board {
    public Position getfoodPosition(){
       return food.getPosition();
    }
-
    public int getWidth() {
       return width;
    }
-
    public int getHeigh() {
       return heigh;
    }
-
    public Snake getSnake() {
       return snake;
    }
-
    public Food getFood() {
       return food;
    }
@@ -102,8 +98,5 @@ public class Board {
 
       assert(!this.updateState()) ;
       assert(b.updateState());
-
-
-
    }
 }
