@@ -60,7 +60,7 @@ public class Controller {
    @FXML
    private Pane save_pane;
    @FXML
-   private TextArea userrname_txtarea;
+   private TextField userrname_txtField;
    @FXML
    private Button save_okButton;
    @FXML
@@ -81,6 +81,7 @@ public class Controller {
    private final double speed=90.0;//the initial speed of snake.
    private final int length = 2;//the initial length of snake.
    private final int SIZE=10;// the size of a box;
+   private int top10=0;//the 10th score in the history.
    private History h=new History(".");
    @FXML
    void invisible_startPane(ActionEvent event) {
@@ -178,19 +179,29 @@ public class Controller {
    @FXML
       //open the save pane
    void saveScore(ActionEvent event) {
-
-      save_btn1.setDisable(true);
-      save_pane.toFront();
-      save_pane.setVisible(true);
-      restart_btn.setDisable(true);
-      history_btn.setDisable(true);
+      String content[]=h.readfile("history.txt");
+      int score=Integer.parseInt(score_lbl.getText());
+      int score9=-1;
+      if(content.length>=10){
+         String[] s=content[9].split("\\s+");
+         score9=Integer.parseInt(s[0]);
+      }
+      if(content.length<10||  score9<score){
+         save_btn1.setDisable(true);
+         save_pane.toFront();
+         save_pane.setVisible(true);
+         restart_btn.setDisable(true);
+         history_btn.setDisable(true);
+         userrname_txtField.setText("");
+      }
+      else painfeedbake("Your score is too low to recored in History!!");
    }
    // save the new score to txt file
    @FXML
    void save_newScore(ActionEvent event) {
 
-      if(!userrname_txtarea.getText().equals(null) && !userrname_txtarea.getText().equals("")) {
-         h.writetofile(userrname_txtarea.getText(), score_lbl.getText(), "history.txt");
+      if(!userrname_txtField.getText().equals(null) && !userrname_txtField.getText().equals("")) {
+         h.writetofile(userrname_txtField.getText(), score_lbl.getText(), "history.txt");
          save_pane.toBack();
          save_pane.setVisible(false);
          history_btn.setDisable(false);
