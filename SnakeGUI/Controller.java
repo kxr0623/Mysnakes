@@ -194,7 +194,7 @@ public class Controller {
          history_btn.setDisable(true);
          userrname_txtField.setText("");
       }
-      else painfeedbake("Your score is too low to recored in History!!");
+      else painfeedbake("Your score is too low to recored in History!");
    }
    // save the new score to txt file
    @FXML
