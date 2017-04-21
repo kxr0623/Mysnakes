@@ -1,7 +1,10 @@
 package SnakeLogic;
-
 /**
- * Created by 52704 on 2017/3/26.
+ * this class is used to express a position in the game board;
+ * translate a position to another position;
+ * check a position is in the game board or not;
+ * check the position is occupied by snake body or not.
+ * check an object is equal to the current position or not.
  */
 public class Position {
    private int row;
@@ -28,7 +31,7 @@ public class Position {
       return (row==snakebody.row) && (col==snakebody.col);
    }
    // check the point is in the board
-   public boolean inboard(int maxr, int maxc){
+   protected boolean inboard(int maxr, int maxc){
       return (row<maxr && row>=0) &&(col<maxc && col>=0);
    }
    @Override
@@ -52,6 +55,8 @@ public class Position {
       assert (!occupied(testP2));
       assert (inboard(2,2));
       assert (!inboard(-1,1));
+      assert (!equals(testP2));
+      assert (equals(testP));
    }
 
    public static void main(String[] args){

@@ -24,7 +24,8 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 /*
-* this class is used to control the actions on the game interfaces. including the starting page, playing page, save page, history page.
+* this class is used to control the actions on the game interfaces.
+* including the starting page, playing page, save page, history page.
 * */
 public class Controller {
    @FXML

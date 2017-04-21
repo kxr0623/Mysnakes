@@ -5,6 +5,8 @@ import java.util.ArrayList;
 /**
  * the direction of snake is right at first,
  * the color, length, start position is assigned by the parent class.
+ * this class use a list to store the boday positions of snake.
+ * this class allow the snake to move forward, grow up and change direction.
  */
 public class Snake {
    private Direction direction;
@@ -20,7 +22,7 @@ public class Snake {
       this.alive = true;
       this.head = head;
       snakebody=new ArrayList<Position>();
-      for(int i=0;i<length;i++)//set the initialize length of snake
+      for(int i=0;i<length;i++)
          snakebody.add(head);
    }
 
@@ -49,14 +51,14 @@ public class Snake {
    }
 
    //make the snake longer, add the head
-   public void move_grow(){
+   protected void move_grow(){
       if(alive ==true){
          length++;
          forward(head.translate(direction.getRow(),direction.getcol()));
       }
    }
    //move according to the direction, add head and remove tail.
-   public void move(){
+   protected void move(){
       if(alive ==true){
          forward(head.translate(direction.getRow(),direction.getcol()));
          snakebody.remove(0);

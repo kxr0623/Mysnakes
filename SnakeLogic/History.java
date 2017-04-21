@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * This class is used to read history scores from a txt file and save the new score to a file.
+ * This class is used to read history scores from a txt file;
+ * the scores are sorted.
+ * and save the new score to "history.txt" file.
  */
 public class History {
    private String path;
@@ -80,10 +82,8 @@ public class History {
          }
          FileWriter writto = new FileWriter(file, true);
          writto.write("\r\n");
-         //writto.write("SCORE  USERNAME    TIME  \n");
          for(int j=0;j<content.length;j++){
                writto.write(content[j]+"\r\n");
-            //writto.write("\r\n");
          }
          String timeStamp = new SimpleDateFormat("yyyy/MM/dd/HH:mm:ss").format(Calendar.getInstance().getTime());
          String newS=score+"   "+username+"   "+timeStamp;

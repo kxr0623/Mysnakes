@@ -37,6 +37,7 @@ public class Board {
       return true;
    }
    //make the snake move or eat the food. ensure the snake is in the board
+   // if the snake is outside the board, return false
    public boolean updateState(){
       if (food.getPosition().equals(snake.getHead())) {
          snake.move_grow();
@@ -46,7 +47,7 @@ public class Board {
       }
       if(!checkBound(snake.getHead())){
          snake.setAlive(false);
-         return false;//outside the board
+         return false;
       }
       return true;
    }
