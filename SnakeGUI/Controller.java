@@ -80,9 +80,9 @@ public class Controller {
    private Board board;
    private GraphicsContext context;
    private Timeline timeline;
-   private final double speed=90.0;//the initial speed of snake.
+   private final double speed=60.0;//the initial speed of snake.
    private final int length = 2;//the initial length of snake.
-   private final int SIZE=10;// the size of a box;
+   private final int SIZE=15;// the size of a box;
    private History h=new History(".");
    @FXML
    void invisible_startPane(ActionEvent event) {
@@ -97,7 +97,7 @@ public class Controller {
    }
    // create a snake , food and board, move the snake
    private void run() {
-      Position p=new Position(30,30);
+      Position p=new Position(15,15);
       snake=new Snake(Color.GREEN,length,p);
       board=new Board(760,600,SIZE,snake);
       timeline = new Timeline();
