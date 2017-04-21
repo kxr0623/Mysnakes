@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 /*
 * this class is used to control the actions on the game interfaces.
 * including the starting page, playing page, save page, history page.
+* the initial length and speed of snake is controlled in this class.
 * */
 public class Controller {
    @FXML
@@ -82,7 +83,6 @@ public class Controller {
    private final double speed=90.0;//the initial speed of snake.
    private final int length = 2;//the initial length of snake.
    private final int SIZE=10;// the size of a box;
-   private int top10=0;//the 10th score in the history.
    private History h=new History(".");
    @FXML
    void invisible_startPane(ActionEvent event) {
